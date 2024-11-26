@@ -36,7 +36,10 @@ const iconProps = computed(() => dsfrIcon.value ? undefined : typeof props.icon 
       {{ title }}
     </component>
 
-    <p class="fr-callout__text">
+    <p
+      v-if="content"
+      class="fr-callout__text"
+    >
       {{ content }}
     </p>
 
@@ -46,7 +49,12 @@ const iconProps = computed(() => dsfrIcon.value ? undefined : typeof props.icon 
     />
 
     <!-- @slot Slot par défaut pour le contenu de la mise en avant. Sera dans `<div class="fr-callout">` -->
-    <slot />
+    <div
+      v-if="$slots.default"
+      :class="['fr-callout__default', { 'fr-callout__text': !content }]"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
